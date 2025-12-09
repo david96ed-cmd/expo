@@ -8,6 +8,8 @@
 
 ### 🐛 Bug fixes
 
+- resolve "Illegal invocation" errors in `workerd` runtime ([#41502](https://github.com/expo/expo/pull/41502) by [@hassankhan](https://github.com/hassankhan))
+
 ### 💡 Others
 
 ## 6.0.14 — 2025-10-28

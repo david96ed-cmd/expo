@@ -9,6 +9,7 @@
 ### 🐛 Bug fixes
 
 - Fix RSC `[...rsc]+api.ts` template path resolution ([#40760](https://github.com/expo/expo/pull/40760) by [@kitten](https://github.com/kitten))
+- resolve "Illegal invocation" errors in `workerd` runtime ([#41502](https://github.com/expo/expo/pull/41502) by [@hassankhan](https://github.com/hassankhan))
 
 ### 💡 Others
 
