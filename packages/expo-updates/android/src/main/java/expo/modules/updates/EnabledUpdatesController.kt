@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.devsupport.interfaces.DevSupportManager
 import expo.modules.easclient.EASClientID
+import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.CodedException
 import expo.modules.kotlin.exception.toCodedException
 import expo.modules.updates.db.BuildData
@@ -339,6 +340,30 @@ class EnabledUpdatesController(
 
   override val isEnabled: Boolean = true
 
+  fun clearInternalAssetsFolderAsync(promise: Promise) {
+    try {
+      val assetsFolder = updatesDirectory
+      assetsFolder!!.deleteRecursively()
+      promise.resolve(null)
+    } catch (e: Throwable) {
+      promise.reject("ERR_E2E_TEST", null, e)
+    }
+  }
+
+  fun readInternalAssetsFolderAsync(promise: Promise) {
+    try {
+      val assetsFolder = updatesDirectory
+      if (!assetsFolder!!.exists()) {
+        promise.resolve(0)
+      } else {
+        val count = assetsFolder.walk()
+          .count() - 1 // subtract one for the folder itself, which is included in walk()
+        promise.resolve(count)
+      }
+    } catch (e: Throwable) {
+      promise.reject("ERR_E2E_TEST", null, e)
+    }
+  }
   companion object {
     private val TAG = EnabledUpdatesController::class.java.simpleName
   }
